@@ -11,12 +11,12 @@ http.createServer(function (req, res) {
     if(req.url != "/favicon.ico"){
         //parse module url
         var access = url.parse(req.url);
-        //parse string to query string
-        var data = gString.parse(access.query);
-        console.log(data);
-        console.log(data.name,data.sex);
-        res.end();
-
+        if(access.pathname == "/"){
+            //parse string to query string
+            var data = gString.parse(access.query);
+            res.writeHead(200,{"Content-Type" : "text/plain"});
+            res.end(JSON.stringify(data));
+        }
     }
 }).listen(3133); //<<=== Port listen 0n 3133
 
