@@ -4,7 +4,15 @@ var router = require('routes')();
 var view = require('swig');
 
 router.addRoute('/',function (req,res) {
-    var html = view.compileFile('./template/index.html')();
+    var html = view.compileFile('./template/index.html')({
+        title : "Index Page From Galang AS"
+    });
+    res.writeHead(200, {"Content-Type" : "text/html"});
+    res.end(html);
+});
+
+router.addRoute('/contact',function (req,res) {
+    var html = view.compileFile('./template/contact.html')();
     res.writeHead(200, {"Content-Type" : "text/html"});
     res.end(html);
 });
